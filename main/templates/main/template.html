@@ -1,0 +1,399 @@
+{% load static %}
+<!DOCTYPE html>
+  <html>
+    <head>
+      
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+      <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!-- Google font -->
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript" href="{% static 'main/jquery/jQuery.js' %}"></script>
+    </head>
+
+    <body>
+
+      <nav class="light-blue lighten-1">
+        <div class="container">
+          <div class="nav-wrapper">
+            <img style="width:55px;padding-top:5px" src = "{% static 'main/images/filter.png' %}">
+            <!-- <a href="/" class="brand-logo">lightsaber</a> -->
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="/">Home</a></li>
+              <li><a href="{% url 'main:about' %}">About</a></li>
+              <li><a href="#modal1" class="modal-trigger">Login</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="/">Home</a></li>
+        <li><a href="{% url 'main:about' %}">About</a></li>
+        <li><a href="#modal1" class="modal-trigger">Login</a></li>
+      </ul>
+      
+
+      
+      {% block content %}
+      {% endblock %}
+      
+      <!-- footer -->
+       <footer class="page-footer light-blue lighten-1">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <img style="width:55px;padding-top:5px" src = "{% static 'main/images/filter.png' %}">
+                <!-- <h5 class="white-text">Product Recommendation Engine</h5> -->
+                <!-- <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p> -->
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">SiteMap</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#">About</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container center-align">
+            © 2019 Copyright
+            <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+            </div>
+          </div>
+        </footer>
+
+        <!-- sign-up modal -->
+
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+          
+          <div class="row">
+            <div id="left-img" class="col l2 m2 s2">
+              <img class="responsive-img" src="{% static 'main/images/left.png' %}" alt="login" title="login" width="214px" height="1050px">
+            </div>
+            <div class="col l8 m8 s8">
+              <div class="modal-content">
+                <h4 class="center-align">Login to your Account</h4><br><br>
+                  <div class="container">
+                    <form method="POST" class="col s12">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input id="email" type="email" class="validate">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input id="pass" type="password" class="validate">
+                          <label for="pass">Password</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="center-align">
+                          <button class="btn waves-effect waves-light light-blue lighten-1">Login</button>
+                        </div>
+                      </div>
+                    </form>
+                    <p class="center-align">No account ? <a href="" style="color: #29b6f6;font-weight: bold;">Create One</a></p>
+                  </div>
+                </div>
+                
+
+              </div>
+              <div id="right-img" class="col l2 m2 s2">
+                <img class="responsive-img" src="{% static 'main/images/right.png' %}" alt="login" title="login" width="214px" height="550px">
+              </div>
+            </div>
+
+        </div>
+
+      <!-- Javascript/JQuery -->
+      <!-- <script src="jquery-3.4.1.min.js"></script> -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $('.sidenav').sidenav();
+        });
+        setTimeout(function() {
+          $('.modal').modal()
+        });
+
+        
+
+        $(function() {
+          $('#progress').circliful();
+        });
+
+        $(function() {
+          $('#progress1').circliful();
+        });
+
+        // const button = document.querySelector('.button');
+        // const submit = document.querySelector('.submit');
+
+        // function toggleClass() {
+        //   this.classList.toggle('active');
+        // }
+
+        // function addClass() {
+        //   this.classList.add('finished');
+        // }
+
+        // button.addEventListener('click', toggleClass);
+        // button.addEventListener('transitionend', toggleClass);
+        // button.addEventListener('transitionend', addClass);
+
+        //Note -- I removed the respondCanvas function from the circiful library
+        /* PROGRESS CIRCLE COMPONENT */
+        (function ($) {
+
+            $.fn.circliful = function (options, callback) {
+
+                var settings = $.extend({
+                    // These are the defaults.
+                    startdegree: 0,
+                    fgcolor: "#556b2f",
+                    bgcolor: "#eee",
+                    fill: false,
+                    width: 15,
+                    dimension: 200,
+                    fontsize: 15,
+                    percent: 50,
+                    animationstep: 1.0,
+                    iconsize: '20px',
+                    iconcolor: '#999',
+                    border: 'default',
+                    complete: null,
+                    bordersize: 10
+                }, options);
+
+                return this.each(function () {
+
+                    var customSettings = ["fgcolor", "bgcolor", "fill", "width", "dimension", "fontsize", "animationstep", "endPercent", "icon", "iconcolor", "iconsize", "border", "startdegree", "bordersize"];
+
+                    var customSettingsObj = {};
+                    var icon = '';
+                    var endPercent = 0;
+                    var obj = $(this);
+                    var fill = false;
+                    var text, info;
+
+                    obj.addClass('circliful');
+
+                    checkDataAttributes(obj);
+
+                    if (obj.data('text') != undefined) {
+                        text = obj.data('text');
+
+                        if (obj.data('icon') != undefined) {
+                            icon = $('<i></i>')
+                                .addClass('fa ' + $(this).data('icon'))
+                                .css({
+                                    'color': customSettingsObj.iconcolor,
+                                    'font-size': customSettingsObj.iconsize
+                                });
+                        }
+
+                        if (obj.data('type') != undefined) {
+                            type = $(this).data('type');
+
+                            if (type == 'half') {
+                                addCircleText(obj, 'circle-text-half', (customSettingsObj.dimension / 1.45));
+                            } else {
+                                addCircleText(obj, 'circle-text', customSettingsObj.dimension);
+                            }
+                        } else {
+                            addCircleText(obj, 'circle-text', customSettingsObj.dimension);
+                        }
+                    }
+
+                    if ($(this).data("total") != undefined && $(this).data("part") != undefined) {
+                        var total = $(this).data("total") / 100;
+
+                        percent = (($(this).data("part") / total) / 100).toFixed(3);
+                        endPercent = ($(this).data("part") / total).toFixed(3)
+                    } else {
+                        if ($(this).data("percent") != undefined) {
+                            percent = $(this).data("percent") / 100;
+                            endPercent = $(this).data("percent")
+                        } else {
+                            percent = settings.percent / 100
+                        }
+                    }
+
+                    if ($(this).data('info') != undefined) {
+                        info = $(this).data('info');
+
+                        if ($(this).data('type') != undefined) {
+                            type = $(this).data('type');
+
+                            if (type == 'half') {
+                                addInfoText(obj, 0.9);
+                            } else {
+                                addInfoText(obj, 1.25);
+                            }
+                        } else {
+                            addInfoText(obj, 1.25);
+                        }
+                    }
+
+                    $(this).width(customSettingsObj.dimension + 'px');
+
+                    var canvas = $('<canvas></canvas>').attr({
+                        width: customSettingsObj.dimension,
+                        height: customSettingsObj.dimension
+                    }).appendTo($(this)).get(0);
+
+                    var context = canvas.getContext('2d');
+                    var container = $(canvas).parent();
+                    var x = canvas.width / 2;
+                    var y = canvas.height / 2;
+                    var degrees = customSettingsObj.percent * 360.0;
+                    var radians = degrees * (Math.PI / 180);
+                    var radius = canvas.width / 2.5;
+                    var startAngle = 2.3 * Math.PI;
+                    var endAngle = 0;
+                    var counterClockwise = false;
+                    var curPerc = customSettingsObj.animationstep === 0.0 ? endPercent : 0.0;
+                    var curStep = Math.max(customSettingsObj.animationstep, 0.0);
+                    var circ = Math.PI * 2;
+                    var quart = Math.PI / 2;
+                    var type = '';
+                    var fireCallback = true;
+                    var additionalAngelPI = (customSettingsObj.startdegree / 180) * Math.PI;
+
+                    if ($(this).data('type') != undefined) {
+                        type = $(this).data('type');
+
+                        if (type == 'half') {
+                            startAngle = 2.0 * Math.PI;
+                            endAngle = 3.13;
+                            circ = Math.PI;
+                            quart = Math.PI / 0.996;
+                        }
+                    }
+                  
+                    /**
+                     * adds text to circle
+                     *
+                     * @param obj
+                     * @param cssClass
+                     * @param lineHeight
+                     */
+                    function addCircleText(obj, cssClass, lineHeight) {
+                        $("<span></span>")
+                            .appendTo(obj)
+                            .addClass(cssClass)
+                            .text(text)
+                            .prepend(icon)
+                            .css({
+                                'line-height': lineHeight + 'px',
+                                'font-size': customSettingsObj.fontsize + 'px'
+                            });
+                    }
+
+                    /**
+                     * adds info text to circle
+                     *
+                     * @param obj
+                     * @param factor
+                     */
+                    function addInfoText(obj, factor) {
+                        $('<span></span>')
+                            .appendTo(obj)
+                            .addClass('circle-info-half')
+                            .css(
+                                'line-height', (customSettingsObj.dimension * factor) + 'px'
+                            )
+                            .text(info);
+                    }
+
+                    /**
+                     * checks which data attributes are defined
+                     * @param obj
+                     */
+                    function checkDataAttributes(obj) {
+                        $.each(customSettings, function (index, attribute) {
+                            if (obj.data(attribute) != undefined) {
+                                customSettingsObj[attribute] = obj.data(attribute);
+                            } else {
+                                customSettingsObj[attribute] = $(settings).attr(attribute);
+                            }
+
+                            if (attribute == 'fill' && obj.data('fill') != undefined) {
+                                fill = true;
+                            }
+                        });
+                    }
+
+                    /**
+                     * animate foreground circle
+                     * @param current
+                     */
+                    function animate(current) {
+
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+
+                        context.beginPath();
+                        context.arc(x, y, radius, endAngle, startAngle, false);
+
+                        context.lineWidth = customSettingsObj.bordersize + 1;
+
+                        context.strokeStyle = customSettingsObj.bgcolor;
+                        context.stroke();
+
+                        if (fill) {
+                            context.fillStyle = customSettingsObj.fill;
+                            context.fill();
+                        }
+
+                        context.beginPath();
+                        context.arc(x, y, radius, -(quart) + additionalAngelPI, ((circ) * current) - quart + additionalAngelPI, false);
+
+                        if (customSettingsObj.border == 'outline') {
+                            context.lineWidth = customSettingsObj.width + 13;
+                        } else if (customSettingsObj.border == 'inline') {
+                            context.lineWidth = customSettingsObj.width - 13;
+                        }
+
+                        context.strokeStyle = customSettingsObj.fgcolor;
+                        context.stroke();
+
+                        if (curPerc < endPercent) {
+                            curPerc += curStep;
+                            requestAnimationFrame(function () {
+                                animate(Math.min(curPerc, endPercent) / 100);
+                            }, obj);
+                        }
+
+                        if (curPerc == endPercent && fireCallback && typeof(options) != "undefined") {
+                            if ($.isFunction(options.complete)) {
+                                options.complete();
+
+                                fireCallback = false;
+                            }
+                        }
+                    }
+
+                    animate(curPerc / 100);
+
+                });
+            };
+        }(jQuery));
+
+        
+      </script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+  </html> 

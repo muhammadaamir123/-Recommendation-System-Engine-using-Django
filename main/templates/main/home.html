@@ -1,0 +1,48 @@
+{% extends 'main/template.html' %}
+
+{% block content %}
+
+<div class="container-fluid center-align" id="main-header">
+	<h3>Product Recommendation Engine</h3>
+	<h5>Get Best Suggestion On Your Next Gadget</h5>
+</div>
+
+<div class="container" id="search-engine">
+	<form action="" method="POST" class="col s12">
+		{% csrf_token %}
+		<div class="input-field col s6">
+	        <input id="search" type="text" class="validate" name="search">
+
+	        <label for="search">Find your Gadget</label>
+	    </div>
+	    <div class="col s6">
+	    	<button class="btn waves-effect waves-light light-blue lighten-1" type="submit" >Search</button>
+	    	<!-- <button class="button">
+				<span class="submit">Submit</span>
+				<span class="loading"><i class="fa fa-refresh"></i></span>
+				<span class="check"><i class="fa fa-check"></i></span>
+			</button> -->
+	    </div>
+	</form>
+</div>
+
+<div class="container z-depth-1 {{hide}}" id="result">
+	<h4>Result</h4>
+	
+	<div class="row">
+		<div class="col l4 m4 s12">
+			<label for="progress"><h6>Positive</h6></label>
+	    	<div id="progress" data-dimension="200" data-text="{{positive}}%" data-fontsize="36" data-percent="{{positive}}" data-fgcolor="#29b6f6" data-bgcolor="#eee" data-width="15" data-bordersize="15" data-animationstep="2"></div>
+		</div>
+	    <div class="col l4 m4 s12">
+	    	<label for="progress1"><h6>Negative</h6></label>
+	    	<div id="progress1" data-dimension="200" data-text="{{negative}}%" data-fontsize="36" data-percent="{{negative}}" data-fgcolor="#29b6f6" data-bgcolor="#eee" data-width="15" data-bordersize="15" data-animationstep="2"></div>
+	    </div>
+	</div>
+
+</div>
+<br><br>
+
+
+
+{% endblock %}
